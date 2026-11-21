@@ -1,0 +1,6 @@
+# WASM SIMD128 is off by default (Rust targets the MVP). memchr — the
+# delimiter/escape search this parser lives in — uses SIMD when it is on:
+# it cuts the whole parse from ~114 ms to ~84 ms on the practice set.
+# Keep this file: a rebuild without it silently loses the speedup.
+[build]
+rustflags = ["-C", "target-feature=+simd128"]
